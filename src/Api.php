@@ -60,19 +60,6 @@ class Api
         $this->res['curl_errno'] = $curl_errno;
         $this->res['curl_error'] = $curl_error;
 
-//        $opts = [
-//            "http" => [
-//                "method" => "GET",
-//                "header" => "userToken: Kh@m0Sh!\r\n"
-//            ]
-//        ];
-//        $context = stream_context_create($opts);
-//        $message = file_get_contents($url, false, $context);
-//        $this->res['response'] = $message;
-//        $this->res['response_header'] = json_encode($http_response_header);
-//        $status = explode(' ', $http_response_header[0]);
-//        $this->res['code'] = $status;
-
         return $this->res;
 
     }
