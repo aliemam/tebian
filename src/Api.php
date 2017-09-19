@@ -45,24 +45,19 @@ class Api
         ];
 
         $curl = curl_init($url);
-//        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_exec($curl);
-var_dump('1111111111111111111111');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($curl);
-        var_dump('22222222222222222');
+
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        var_dump('3333333333333333333');
         $curl_errno = curl_errno($curl);
-        var_dump('4444444444444444');
         $curl_error = curl_error($curl);
-        var_dump('5555555555555555');
         $this->res['response'] = $response;
         $this->res['code'] = $code;
         $this->res['curl_errno'] = $curl_errno;
         $this->res['curl_error'] = $curl_error;
-        var_dump('areeeeeeeeeeeeeeeeeeeeeeeeeeee');
         return $this->res;
 
     }
