@@ -6,9 +6,9 @@
  * Time: 2:51 PM
  */
 
-namespace Aliemam\Tebian\Traits;
+namespace Tebian\Traits;
 
-use Aliemam\Tebian\Exceptions\ApiException;
+use Tebian\Exceptions\ApiException;
 
 
 trait Tebian {
