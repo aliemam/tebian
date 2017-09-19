@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Tebian;
+namespace Aliemam\Tebian;
 
-use Tebian\Exceptions\ApiException;
+use Aliemam\Tebian\Exceptions\ApiException;
 
 class Api
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tebian\Exceptions;
+namespace Aliemam\Tebian\Exceptions;
 
 class ApiException extends \Exception
 {
