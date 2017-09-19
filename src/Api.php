@@ -10,6 +10,7 @@ class Api
 
     private $config;
     private $response;
+    private $res;
 
     /**
      * Api constructor.
@@ -51,25 +52,17 @@ class Api
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $curl_errno = curl_errno($curl);
         $curl_error = curl_error($curl);
-        if( $curl_errno ) {
-            throw new ApiException($curl_error, $curl_errno);
-        }
-        else if( $code != 200 ) {
-            throw new ApiException("Request has errors", $code);
-        }
 
-        $this->response = $response;
-        $res = json_decode($response, TRUE);
-        if( isset($res['type']) && $res['type'] == 'error' ) {
-            throw new ApiException($res['message'], '500');
-        }
+        $this->res['response'] = $response;
+        $this->res['curl_errno'] = $curl_errno;
+        $this->res['curl_error'] = $curl_error;
 
-        return $res;
+        return $this->res;
 
     }
 
     public function getRawRes(){
-        return $this->response;
+        return $this->res;
     }
 }
 ?>
