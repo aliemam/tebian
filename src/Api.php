@@ -53,6 +53,10 @@ class Api
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $curl_errno = curl_errno($curl);
         $curl_error = curl_error($curl);
+        $this->res['response'] = $response;
+        $this->res['code'] = $code;
+        $this->res['curl_errno'] = $curl_errno;
+        $this->res['curl_error'] = $curl_error;
 
         if($response===false){
             throw new ApiException('Tebian Api has error');
@@ -63,10 +67,6 @@ class Api
             throw new ApiException(html_entity_decode($r['ExceptionMessage']));
         }
 
-        $this->res['response'] = $response;
-        $this->res['code'] = $code;
-        $this->res['curl_errno'] = $curl_errno;
-        $this->res['curl_error'] = $curl_error;
 
         return true;
 
