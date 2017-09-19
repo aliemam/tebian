@@ -65,6 +65,8 @@ class Api
 
         $this->res['response'] = $response;
         $this->res['code'] = $code;
+        $this->res['curl_errno'] = $curl_errno;
+        $this->res['curl_error'] = $curl_error;
 
         return true;
 
