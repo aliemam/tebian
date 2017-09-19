@@ -50,15 +50,23 @@ class Api
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($curl);
-
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $curl_errno = curl_errno($curl);
         $curl_error = curl_error($curl);
+
+        if($response===false){
+            throw new ApiException('Tebian Api has error');
+        }
+
+        if((string)$code!=='200'){
+            $r = json_decode($response);
+            throw new ApiException(html_entity_decode($r['ExceptionMessage']));
+        }
+
         $this->res['response'] = $response;
         $this->res['code'] = $code;
-        $this->res['curl_errno'] = $curl_errno;
-        $this->res['curl_error'] = $curl_error;
-        return $this->res;
+
+        return true;
 
     }
 
