@@ -63,7 +63,7 @@ class Api
         }
 
         if((string)$code!=='200'){
-            $r = json_decode($response);
+            $r = json_decode($response, true);
             throw new ApiException(html_entity_decode($r['ExceptionMessage']));
         }
 
