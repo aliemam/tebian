@@ -39,24 +39,38 @@ class Api
         $msg = htmlentities($msg);
         $msg = str_replace(' ', '+', $msg);
         $url = $this->config['base_url'].'?Message='.$msg.'&Receiver='.$to;
-        $headers = [
-            'userToken: '.$this->config['user_token']
+
+//        $headers = [
+//            'userToken: '.$this->config['user_token']
+//        ];
+
+//        $curl = curl_init($url);
+//        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER, false)
+//        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+//        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+//        curl_exec($curl);
+//
+//        $response = curl_exec($curl);
+//        $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+//        $curl_errno = curl_errno($curl);
+//        $curl_error = curl_error($curl);
+//
+//        $this->res['response'] = $response;
+//        $this->res['code'] = $code;
+//        $this->res['curl_errno'] = $curl_errno;
+//        $this->res['curl_error'] = $curl_error;
+
+        $opts = [
+            "http" => [
+                "method" => "GET",
+                "header" => "userToken: Kh@m0Sh!\r\n"
+            ]
         ];
-
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_exec($curl);
-
-        $response = curl_exec($curl);
-        $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        $curl_errno = curl_errno($curl);
-        $curl_error = curl_error($curl);
-
-        $this->res['response'] = $response;
-        $this->res['code'] = $code;
-        $this->res['curl_errno'] = $curl_errno;
-        $this->res['curl_error'] = $curl_error;
+        $context = stream_context_create($opts);
+        file_get_contents($url, false, $context);
+        $status = explode(' ', $http_response_header[0]);
+        $this->res['response'] = $http_response_header;
+        $this->res['code'] = $status;
 
         return $this->res;
 
