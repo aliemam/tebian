@@ -73,7 +73,7 @@ class Api
 //        $this->res['response'] = $http_response_header;
 //        $this->res['code'] = $status;
 
-        return $this->res;
+//        return $this->res;
 
     }
 
