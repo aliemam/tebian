@@ -48,9 +48,7 @@ class Api
         curl_setopt($curl,CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        echo "333\n";
         $response = curl_exec($curl);
-        echo "444\n";
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $curl_errno = curl_errno($curl);
         $curl_error = curl_error($curl);
