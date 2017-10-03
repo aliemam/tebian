@@ -41,15 +41,13 @@ class Api
         $url = $this->config['base_url'].'?Message='.$msg.'&Receiver='.$to;
 
         $headers = [
-            "userToken: Kh@m0Sh!\r\n"
+            "userToken: ".$this->config['user_token']
         ];
 
         $curl = curl_init($url);
-        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER, false)
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_exec($curl);
-
         $response = curl_exec($curl);
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $curl_errno = curl_errno($curl);
@@ -59,6 +57,9 @@ class Api
         $this->res['code'] = $code;
         $this->res['curl_errno'] = $curl_errno;
         $this->res['curl_error'] = $curl_error;
+        if($response === false){
+            throw new ApiException('Cant reach api...');
+        }
 
 //        $opts = [
 //            "http" => [
